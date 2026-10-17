@@ -123,9 +123,10 @@ export function PageHero({ eyebrow, title, sub }: { eyebrow: string; title: stri
 
 export function ProductArt({ p, className }: { p: Product; className?: string }) {
   const Icon = platformIcon(p.platform);
+  const h = 25 + (p.hue % 55);
   return (
     <div className={cn("relative overflow-hidden", className)}
-      style={{ backgroundColor: `oklch(0.19 0.04 ${p.hue})`, backgroundImage: `radial-gradient(circle at 30% 20%, oklch(0.6 0.2 ${p.hue} / 0.55), transparent 55%), radial-gradient(circle at 80% 90%, oklch(0.5 0.18 ${p.hue + 30} / 0.4), transparent 50%)` }}>
+      style={{ backgroundColor: `oklch(0.16 0.03 ${h})`, backgroundImage: `radial-gradient(circle at 30% 20%, oklch(0.62 0.2 ${h} / 0.5), transparent 55%), radial-gradient(circle at 80% 90%, oklch(0.55 0.19 ${h + 20} / 0.35), transparent 50%)` }}>
       <div className="absolute inset-0 grid-lines" />
       <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-background/70 to-transparent" />
       <div className="absolute inset-0 grid place-items-center">
