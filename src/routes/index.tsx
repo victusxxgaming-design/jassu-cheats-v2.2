@@ -1,9 +1,10 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { ArrowRight, Zap, ShieldCheck, Headphones, Info, Sparkles, Monitor, Apple, Boxes } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Shell, ProductCard, DiscordCTA, platformIcon, Pill, Reveal } from "@/components/site";
 import { PRODUCTS, PLATFORMS, FAQS, type Platform } from "@/lib/data";
+import { morphToPage } from "@/lib/morph";
 import { seo } from "@/lib/seo";
 import hero from "@/assets/hero.jpg";
 
@@ -19,6 +20,7 @@ const LOOKING: { id: Platform; title: string; blurb: string; icon: typeof Monito
 ];
 
 function Index() {
+  const nav = useNavigate();
   const featured = PRODUCTS.slice(0, 4);
   const latest = [...PRODUCTS].slice(0, 3);
   return (
@@ -58,6 +60,10 @@ function Index() {
             return (
               <Reveal key={o.id} delay={i * 110} className="h-full">
                 <Link to="/store" search={{ platform: o.id }}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    morphToPage(e.currentTarget, o.title, () => nav({ to: "/store", search: { platform: o.id } }));
+                  }}
                   className="group surface panel-hover panel-corners relative flex h-full flex-col overflow-hidden p-7">
                   <span className="absolute inset-0 bg-hero-glow opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                   <span className="absolute inset-0 grid-lines opacity-70" />
@@ -99,7 +105,12 @@ function Index() {
             const Icon = platformIcon(pl.id);
             const count = PRODUCTS.filter((p) => p.platform === pl.id).length;
             return (
-              <Link key={pl.id} to="/store" search={{ platform: pl.id }} className="surface panel-hover panel-corners group p-6">
+              <Link key={pl.id} to="/store" search={{ platform: pl.id }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  morphToPage(e.currentTarget, pl.label, () => nav({ to: "/store", search: { platform: pl.id } }));
+                }}
+                className="surface panel-hover panel-corners group p-6">
                 <Icon className="h-6 w-6 text-primary-glow" />
                 <p className="mt-10 font-display text-xl font-semibold">{pl.label}</p>
                 <p className="text-sm text-muted-foreground">{pl.blurb}</p>
