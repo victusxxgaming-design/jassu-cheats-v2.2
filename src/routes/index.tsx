@@ -1,9 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Zap, ShieldCheck, Headphones, Info, Sparkles } from "lucide-react";
+import { ArrowRight, Zap, ShieldCheck, Headphones, Info, Sparkles, Monitor, Apple, Boxes } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Shell, ProductCard, DiscordCTA, platformIcon, Pill } from "@/components/site";
-import { PRODUCTS, PLATFORMS, FAQS } from "@/lib/data";
+import { Shell, ProductCard, DiscordCTA, platformIcon, Pill, Reveal } from "@/components/site";
+import { PRODUCTS, PLATFORMS, FAQS, type Platform } from "@/lib/data";
 import { seo } from "@/lib/seo";
 import hero from "@/assets/hero.jpg";
 
@@ -11,6 +11,12 @@ export const Route = createFileRoute("/")({
   head: () => seo("Premium Game Addons", "Vantix is a premium marketplace for independently made game addons — latest versions only, instant delivery."),
   component: Index,
 });
+
+const LOOKING: { id: Platform; title: string; blurb: string; icon: typeof Monitor }[] = [
+  { id: "pc", title: "PC Panel", blurb: "Emulator and desktop overlays, keymaps and HUD packs.", icon: Monitor },
+  { id: "ios", title: "iOS Panel", blurb: "iPhone and iPad interface themes, tuned for touch.", icon: Apple },
+  { id: "other", title: "Others", blurb: "Audio packs, crosshair labs, tools and utilities.", icon: Boxes },
+];
 
 function Index() {
   const featured = PRODUCTS.slice(0, 4);
