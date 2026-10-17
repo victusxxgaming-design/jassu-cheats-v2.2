@@ -4,6 +4,7 @@ import { Search, ShoppingBag, User, Menu, X, Monitor, Apple, Smartphone, Boxes, 
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/lib/cart";
 import { platformLabel, money, type Product, type Platform } from "@/lib/data";
+import { consumeMorph } from "@/lib/morph";
 import { cn } from "@/lib/utils";
 
 export const platformIcon = (p: Platform) => ({ pc: Monitor, ios: Apple, android: Smartphone, other: Boxes })[p];
@@ -105,7 +106,21 @@ export function Footer() {
 }
 
 export function Shell({ children }: { children: ReactNode }) {
-  return (<><Header /><main className="min-h-[60vh]">{children}</main><Footer /></>);
+  return (<><Header /><main className="min-h-[60vh]"><MorphReveal>{children}</MorphReveal></main><Footer /></>);
+}
+
+/** Plays the settle-in animation after a full-page morph transition. */
+export function MorphReveal({ children }: { children: ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (consumeMorph(140) && ref.current && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      ref.current.animate(
+        [{ opacity: 0.45, transform: "translateY(16px) scale(0.99)" }, { opacity: 1, transform: "none" }],
+        { duration: 480, easing: "cubic-bezier(0.22, 0.9, 0.26, 1)" },
+      );
+    }
+  }, []);
+  return <div ref={ref}>{children}</div>;
 }
 
 export function Reveal({ children, className, delay = 0 }: { children: ReactNode; className?: string; delay?: number }) {
