@@ -69,7 +69,7 @@ function Index() {
                   </span>
                   <h3 className="relative mt-8 font-display text-2xl font-bold uppercase tracking-wide">{o.title}</h3>
                   <p className="relative mt-2 text-sm text-muted-foreground">{o.blurb}</p>
-                  <span className="relative mt-auto flex items-center justify-between gap-3 border-t pt-5 pt-5">
+                  <span className="relative mt-auto flex items-center justify-between gap-3 border-t pt-5">
                     <span className="text-xs text-muted-foreground">{count} panels</span>
                     <span className="inline-flex items-center gap-1.5 font-display text-sm font-bold uppercase tracking-wider text-primary-glow">
                       Browse <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
