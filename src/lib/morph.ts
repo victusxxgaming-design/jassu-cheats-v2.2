@@ -8,7 +8,6 @@ let curtain: HTMLDivElement | null = null;
 export function morphToPage(origin: HTMLElement, title: string, go: () => void): void {
   if (curtain) return; // a morph is already running
   if (typeof window === "undefined") { go(); return; }
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { go(); return; }
 
   const r = origin.getBoundingClientRect();
   const vw = window.innerWidth;
@@ -48,12 +47,12 @@ export function morphToPage(origin: HTMLElement, title: string, go: () => void):
       { left: `${r.left}px`, top: `${r.top}px`, width: `${r.width}px`, height: `${r.height}px`, borderRadius: "22px" },
       { left: "0px", top: "0px", width: `${vw}px`, height: `${vh}px`, borderRadius: "0px" },
     ],
-    { duration: 520, easing: "cubic-bezier(0.22, 0.9, 0.26, 1)", fill: "forwards" },
+    { duration: 750, easing: "cubic-bezier(0.22, 0.9, 0.26, 1)", fill: "forwards" },
   );
   dim.animate([{ opacity: 0 }, { opacity: 0.55 }], { duration: 420, easing: "ease-out", fill: "forwards" });
   el.querySelector("[data-morph-content]")?.animate(
     [{ transform: "scale(0.92)", opacity: 0 }, { transform: "scale(1)", opacity: 1 }],
-    { duration: 480, easing: "cubic-bezier(0.22, 0.9, 0.26, 1)", fill: "forwards" },
+    { duration: 650, easing: "cubic-bezier(0.22, 0.9, 0.26, 1)", fill: "forwards" },
   );
 
   grow.onfinish = () => {
