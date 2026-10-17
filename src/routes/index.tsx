@@ -18,13 +18,13 @@ function Index() {
   return (
     <Shell>
       <section className="relative overflow-hidden border-b">
-        <img src={hero} alt="" width={1600} height={912} className="absolute inset-0 h-full w-full object-cover opacity-60 md:object-[70%_50%]" />
+        <img src={hero} alt="" width={1600} height={912} className="absolute inset-0 h-full w-full object-cover opacity-80 md:object-[70%_50%]" />
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/10" />
-        <div className="absolute inset-0 bg-hero-glow" />
+        <div className="absolute inset-0 bg-embers" />
         <div className="container-x relative py-20 md:py-36 animate-rise">
-          <Pill tone="primary"><Sparkles className="h-3 w-3" />Season drop · 8 new releases</Pill>
+          <Pill tone="primary"><Sparkles className="h-3 w-3" />Free Fire season drop · 8 new panels</Pill>
           <h1 className="mt-6 max-w-2xl text-4xl sm:text-5xl md:text-7xl font-bold uppercase leading-[0.95] tracking-tight">
-            Precision addons,<br /><span className="text-gradient">crafted for players.</span>
+            Booyah-ready panels,<br /><span className="text-gradient">built for survivors.</span>
           </h1>
           <p className="mt-6 max-w-lg text-lg text-muted-foreground">HUDs, sensitivity suites and visual packs for PC, iOS and Android. Always the latest version, delivered instantly.</p>
           <div className="mt-10 flex flex-wrap gap-3">
