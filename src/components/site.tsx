@@ -14,7 +14,7 @@ export function Logo() {
       <span className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-primary shadow-glow">
         <svg viewBox="0 0 24 24" className="h-4 w-4 fill-primary-foreground"><path d="M3 4h4l5 11 5-11h4l-7.5 16h-3z" /></svg>
       </span>
-      <span className="font-display text-lg font-semibold tracking-tight">Vantix</span>
+      <span className="font-display text-xl font-bold uppercase tracking-wider">Vantix</span>
     </Link>
   );
 }
@@ -38,7 +38,7 @@ export function Header() {
         <nav className="hidden md:flex items-center gap-1">
           {NAV.map((n) => (
             <Link key={n.label} to="/store" search={n.platform ? { platform: n.platform } : {}}
-              className="rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground">
+              className="rounded-md px-3 py-2 font-display text-sm font-semibold uppercase tracking-wider text-muted-foreground transition-colors hover:text-foreground [&.active]:text-primary-glow">
               {n.label}
             </Link>
           ))}
@@ -110,11 +110,11 @@ export function Shell({ children }: { children: ReactNode }) {
 
 export function PageHero({ eyebrow, title, sub }: { eyebrow: string; title: string; sub?: string }) {
   return (
-    <section className="relative overflow-hidden border-b">
+    <section className="relative overflow-hidden border-b grid-lines">
       <div className="absolute inset-0 bg-hero-glow" />
       <div className="container-x relative py-14 md:py-20">
         <p className="eyebrow">{eyebrow}</p>
-        <h1 className="mt-3 text-3xl md:text-5xl font-semibold">{title}</h1>
+        <h1 className="mt-3 text-3xl md:text-5xl font-bold uppercase tracking-tight animate-rise">{title}</h1>
         {sub && <p className="mt-4 max-w-2xl text-muted-foreground">{sub}</p>}
       </div>
     </section>
@@ -124,8 +124,10 @@ export function PageHero({ eyebrow, title, sub }: { eyebrow: string; title: stri
 export function ProductArt({ p, className }: { p: Product; className?: string }) {
   const Icon = platformIcon(p.platform);
   return (
-    <div className={cn("relative overflow-hidden grid-lines", className)}
+    <div className={cn("relative overflow-hidden", className)}
       style={{ backgroundColor: `oklch(0.19 0.04 ${p.hue})`, backgroundImage: `radial-gradient(circle at 30% 20%, oklch(0.6 0.2 ${p.hue} / 0.55), transparent 55%), radial-gradient(circle at 80% 90%, oklch(0.5 0.18 ${p.hue + 30} / 0.4), transparent 50%)` }}>
+      <div className="absolute inset-0 grid-lines" />
+      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-background/70 to-transparent" />
       <div className="absolute inset-0 grid place-items-center">
         <div className="grid h-16 w-16 place-items-center rounded-2xl border border-border bg-background/30 backdrop-blur">
           <Icon className="h-7 w-7" />
@@ -163,20 +165,21 @@ export function ProductCard({ p }: { p: Product }) {
   const Icon = platformIcon(p.platform);
   return (
     <Link to="/product/$slug" params={{ slug: p.slug }}
-      className="group surface overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
+      className="group surface panel-hover panel-corners overflow-hidden focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
       <ProductArt p={p} className="aspect-[4/3] transition-transform duration-500 group-hover:scale-[1.03]" />
+      <div className="glow-line opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
       <div className="p-4 space-y-3">
         <div className="flex items-center justify-between gap-2">
           <Pill tone="primary">v{p.version} · Latest</Pill>
           {p.stock !== "in" && <Status s={p.stock} />}
         </div>
         <div>
-          <h3 className="font-semibold truncate">{p.name}</h3>
+          <h3 className="font-display text-lg font-bold uppercase tracking-wide truncate">{p.name}</h3>
           <p className="mt-1 text-xs text-muted-foreground line-clamp-1">{p.tagline}</p>
         </div>
         <div className="flex items-center justify-between">
           <span className="flex items-center gap-1.5 text-xs text-muted-foreground"><Icon className="h-3.5 w-3.5" />{platformLabel(p.platform)}<Star className="ml-2 h-3 w-3 fill-warning text-warning" />{p.rating}</span>
-          <span className="font-display font-semibold">{money(p.price)}</span>
+          <span className="font-display text-lg font-bold text-primary-glow">{money(p.price)}</span>
         </div>
       </div>
     </Link>
@@ -186,7 +189,7 @@ export function ProductCard({ p }: { p: Product }) {
 export function DiscordCTA() {
   return (
     <section className="container-x mt-24">
-      <div className="surface relative overflow-hidden p-8 md:p-12">
+      <div className="surface panel-corners relative overflow-hidden p-8 md:p-12">
         <div className="absolute inset-0 bg-hero-glow" />
         <div className="relative flex flex-col md:flex-row md:items-center gap-6 justify-between">
           <div>
